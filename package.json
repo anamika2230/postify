@@ -11,10 +11,7 @@
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
     "@tailwindcss/typography": "^0.5.19",
-<<<<<<< HEAD
     "@vercel/analytics": "^1.6.1",
-=======
->>>>>>> 7e157a7bb18ca49b2d0a100608ed82825b614053
     "next": "16.1.6",
     "react": "19.2.3",
     "react-dom": "19.2.3",
