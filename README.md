@@ -1,36 +1,96 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Postify - AI Content Assistant
 
-## Getting Started
+An AI-powered social media content generator built with Next.js and Google Gemini API. Generate captions, hashtags, viral post ideas, hooks, and more — tailored to your content niche.
 
-First, run the development server:
+## Features
+
+- 9 content niches (Fitness, Tech, Fashion, Travel, Education, Business, Gaming, News, Other)
+- 2 content modes (Creative / Trending)
+- 7 AI-powered tools:
+  1. Caption Generator
+  2. Hashtag Generator
+  3. Viral Post Ideas
+  4. Hook Generator
+  5. Improve My Caption
+  6. Best Posting Time
+  7. Trending Topics
+- Conversational chat interface
+- `/menu` command to return to tools anytime
+- `/reset` command to start over
+
+## Tech Stack
+
+- Next.js 16 (App Router)
+- TypeScript
+- Tailwind CSS v4
+- Google Gemini API (`@google/generative-ai`)
+- React Markdown
+
+## Setup Instructions
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) version 18 or higher
+- A Google Gemini API key
+
+### Step 1: Get a Gemini API Key
+
+1. Go to [https://aistudio.google.com/apikey](https://aistudio.google.com/apikey)
+2. Sign in with your Google account
+3. Click **"Create API key"** → **"Create API key in new project"**
+4. Copy the generated key
+
+### Step 2: Install Dependencies
+
+```bash
+npm install
+```
+
+### Step 3: Set Up Environment Variables
+
+```bash
+cp .env.example .env.local
+```
+
+Open `.env.local` and replace the placeholder with your actual API key:
+
+```
+GEMINI_API_KEY=your_actual_api_key_here
+```
+
+### Step 4: Run the Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+postify/
+├── app/
+│   ├── api/chat/route.ts    — Gemini API endpoint
+│   ├── page.tsx             — Main chat page
+│   ├── layout.tsx           — Root layout
+│   └── globals.css          — Global styles & animations
+├── components/
+│   ├── ChatMessage.tsx      — Chat bubble with markdown rendering
+│   ├── ChatInput.tsx        — Text input with send button
+│   ├── NicheSelector.tsx    — Niche selection grid
+│   ├── ModeSelector.tsx     — Mode selection cards
+│   ├── MenuSelector.tsx     — Main menu options
+│   └── SuggestionBar.tsx    — Quick action suggestions
+├── lib/
+│   └── gemini.ts            — Gemini client & prompt templates
+├── types/
+│   └── index.ts             — TypeScript type definitions
+├── .env.example             — Environment variable template
+└── .env.local               — Your actual API key (git-ignored)
+```
 
-## Learn More
+## Important Notes
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Never commit `.env.local`** — it contains your secret API key and is already listed in `.gitignore`
+- The Gemini free tier has daily request limits. If you hit rate limits, wait for the quota to reset or enable billing on your Google Cloud project.
